@@ -9,3 +9,6 @@ node_modules/
 
 # Ignore virtual environment
 .venv/
+
+# Ignore .DS_Store files, which are created by macOS for storing folder attributes
+.DS_Store

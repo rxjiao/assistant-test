@@ -1,21 +1,38 @@
 from openai import OpenAI
 import time
 import subprocess
+import os
 
 client = OpenAI()
 
-# Upload a file with an "assistants" purpose
-file = client.files.create(
-  file=open("assets/test.docx", "rb"),
-  purpose='assistants'
-)
+# List of supported file formats
+supported_formats = ['c', 'cpp', 'csv', 'docx', 'html', 'java', 'json', 'md', 'pdf', 'php', 'pptx', 'py', 'rb', 'tex', 'txt', 'css', 'jpeg', 'jpg', 'js', 'gif', 'png', 'tar', 'ts', 'xlsx', 'xml', 'zip']
+
+# Get a list of all files in the 'assets' directory
+file_list = os.listdir('assets')
+
+# Filter the list to include only supported file formats
+file_list = [f for f in file_list if f.split('.')[-1] in supported_formats]
+
+# Create a list to store the file objects
+files = []
+
+# Upload each file in the list
+for filename in file_list:
+    with open(f'assets/{filename}', 'rb') as f:
+        file = client.files.create(
+            file=f,
+            purpose='assistants'
+        )
+        # Add the file object to the list
+        files.append(file)
 
 # Add the file to the assistant
 assistant = client.beta.assistants.create(
-  instructions="You are a customer support chatbot. Use your knowledge base to best respond to customer queries.",
+  instructions="You are an AI assistant. Read the provided files and use the information to answer questions about the files.",
   model="gpt-4-1106-preview",
   tools=[{"type": "retrieval"}],
-  file_ids=[file.id]
+  file_ids=[f.id for f in files]
 )
 
 # Retrieve the assistant ID
