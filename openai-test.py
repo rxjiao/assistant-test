@@ -77,4 +77,4 @@ else:
     print("\nThe assistant was not deleted. ID:", assistant.id, "\n")
 
     # Call the shell script
-    subprocess.call(['bash', 'clear_assistant.sh', assistant.id]) 
+    subprocess.call(['bash', 'clear_assistant.sh', assistant.id])
