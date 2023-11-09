@@ -19,6 +19,8 @@ files = []
 
 # Upload each file in the list
 for filename in file_list:
+    file_path = f'assets/{filename}'
+    print(f"Uploading file: {file_path}")
     with open(f'assets/{filename}', 'rb') as f:
         file = client.files.create(
             file=f,
@@ -27,16 +29,26 @@ for filename in file_list:
         # Add the file object to the list
         files.append(file)
 
+print("\nAll files uploaded successfully.\n")
+
 # Add the file to the assistant
 assistant = client.beta.assistants.create(
   instructions="You are an AI assistant. Read the provided files and use the information to answer questions about the files.",
-  model="gpt-4-1106-preview",
+  model="gpt-4-1106-preview", # Available models: gpt-4-1106-preview and gpt-3.5-turbo-1106
   tools=[{"type": "retrieval"}],
   file_ids=[f.id for f in files]
 )
 
 # Retrieve the assistant ID
 print("\nThe assistant ID is:\n", assistant.id, "\n")
+
+# Append the assistant.id to the file
+with open('assistant_ids.txt', 'a') as f:
+    f.write(f"{assistant.id}\n")
+
+# Write user input and assistant output to a file
+with open('Conversation_logs.md', 'a') as f:
+    f.write(f"## Session: {assistant.id}\n\nFile: {file_list}\n\n")
 
 # Initialize a thread
 thread = client.beta.threads.create(
@@ -82,7 +94,12 @@ while True:
     )
 
     # Print the latest assistant message
-    print("Assistant:", messages.data[0].content[0].text.value, "\n")
+    assistant_message = messages.data[0].content[0].text.value
+    print("Assistant:", assistant_message, "\n")
+
+    # Log this conversation
+    with open('Conversation_logs.md', 'a') as f:
+        f.write(f"**User**: {user_input}\n**Assistant**: {assistant_message}\n\n")
 
 
 # Delete the assistant
