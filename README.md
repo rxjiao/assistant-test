@@ -27,7 +27,7 @@ The script requires an API key, which should be stored in an environment variabl
 export OPENAI_API_KEY=your_api_key
 ```
 
-Replace `your_api_key` with your actual API key. Please see the [OpenAI API documentation](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key?context=python) for more information.
+Replace `your_api_key` with your actual API key. Please see the [OpenAI API documentation](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key?context=python) "Step 2: Setup your API key" for more information.
 
 ## Usage
 
