@@ -8,7 +8,8 @@ Before running the script, you should set up a virtual environment to isolate th
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate # Mac
+.venv\Scripts\activate # Windows
 ```
 
 Next, install the required packages by running the following command in your terminal:
