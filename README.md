@@ -28,7 +28,7 @@ OPENAI_API_KEY=your_api_key
 ASST_ID=your_asst_id
 ```
 
-Replace `your_api_key` with your actual API key. Replace `your_asst_id` with your actual assistant ID. Please see the [OpenAI API documentation](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key?context=python) for more information.
+Replace `your_api_key` with your actual API key. Please see the [OpenAI API documentation](https://platform.openai.com/docs/quickstart/step-2-setup-your-api-key?context=python) "Step 2: Setup your API key" for more information.
 
 ## Usage
 
