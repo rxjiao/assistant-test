@@ -42,13 +42,13 @@ assistant = client.beta.assistants.create(
 # Retrieve the assistant ID
 print("\nThe assistant ID is:\n", assistant.id, "\n")
 
-# Append the assistant.id to the file
-with open('assistant_ids.txt', 'a') as f:
-    f.write(f"{assistant.id}\n")
+# Log current time and assistant.id
+with open('assistant_id_log.txt', 'a') as f:
+    f.write(f"{time.time()}: {assistant.id}\n")
 
 # Write user input and assistant output to a file
 with open('Conversation_logs.md', 'a') as f:
-    f.write(f"## Session: {assistant.id}\n\nFile: {file_list}\n\n")
+    f.write(f"## Assistant: {assistant.id}\n\nFile: {file_list}\n\n")
 
 # Initialize a thread
 thread = client.beta.threads.create(

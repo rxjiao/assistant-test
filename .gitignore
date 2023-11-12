@@ -12,3 +12,12 @@ node_modules/
 
 # Ignore .DS_Store files, which are created by macOS for storing folder attributes
 .DS_Store
+
+# Ignore .env files as they often contain sensitive information
+.env
+
+# Ignore last_thread_id.txt file
+last_thread_id.txt
+
+# Ignore conversation logs as it contains sensitive information
+Conversation_logs.md
